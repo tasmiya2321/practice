@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="session.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: rgb(247,241,233)
+        }
+
+        input, type[text] {
+            height: 25px;
+            margin-top: 20px;
+        }
+
+        .CenterType {
+            height: 25px;
+            padding-right: 55px;
+            margin-top: 47px;
+            margin-left: 530px;
+        }
+
+        h1 {
+            margin-top: 10px;
+        }
+
+        button {
+            margin-left: 1000px;
+            margin-bottom: 18px;
+            padding-left: 50px;
+            padding-right: 40px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            background-color: #d7ca94;
+        }
+
+
+        .table {
+            margin: 20px; 
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: center;
+            border: 1px solid black;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #fffcfc;
+            overflow-y: auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        .menu-toggle {
+            margin-top:-1413px;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+            .menu-toggle:hover {
+                transform: scale(1.1);
+            }
+
+        .bar {
+            width: 25px;
+            height: 3px;
+            background-color: #1e1c1c;
+            margin: 3px 0;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+            .bar:hover {
+                background-color: orange;
+            }
+
+        nav#sidebar {
+            position: fixed;
+            left: -250px;
+            top: 0;
+            width: 250px;
+            height: 100%;
+            background-color: white;
+            overflow-y: auto;
+            transition: left 0.5s, transform 0.5s;
+            transform: scaleX(0);
+        }
+
+            nav#sidebar.active {
+                left: 0;
+                transform: scaleX(1);
+            }
+
+            nav#sidebar ul {
+                padding: 0;
+                list-style: none;
+            }
+
+                nav#sidebar ul li {
+                    padding: 15px;
+                    text-align: center;
+                    opacity: 0;
+                    transform: translateY(20px);
+                    transition: opacity 0.5s, transform 0.5s;
+                }
+
+            nav#sidebar.active ul li {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            nav#sidebar ul li a {
+                text-decoration: none;
+                color: #100d0d;
+                transition: color 0.3s;
+            }
+
+                nav#sidebar ul li a:hover {
+                    color: orange;
+            }
+            .search-box {
+                position: relative;
+                width: 250px;
+                margin-right:15%;
+                left: 20px;
+                top: -50px;
+            }
+
+            .search-box input {
+                width: 150%;
+                padding: 10px 40px 10px 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+          
+            }
+
+            .search-btn {
+                position: absolute;
+                right: 5px;
+                top: 50%;
+                transform: translateY(-50%);
+                background: none;
+                border: none;
+                cursor: pointer;
+                outline: none;
+                text-align: center;
+            }
+
+            .search-btn i {
+                font-size: 18px;
+                color: #7a7a7a;
+                
+                margin-top: 20px;
+                margin-right: -385px;
+             }
+            
+            body {
+               
+                padding: 20px;
+            }
+
+            .filter-options {
+                display: flex;
+                gap: 10px;
+                align-items: center;
+            }
+
+            .dropdown {
+                display: none; 
+            }
+
+            .dropdowns {
+                display: none; 
+                flex-direction: column; 
+            }
+
+            .filter-icon {
+                position: absolute;
+                right:400px;
+                top: 165px;
+                font-size: 18px;
+                cursor: pointer;
+                
+            }
+
+            select {
+                margin-left: 565px;
+                margin-top: -20px;
+            }
+            input[type="radio"] {
+                width: 20px;
+                height: 20px;
+                margin: 0;
+                padding: 0;
+            }
+
+            input[type="radio"]:checked {
+                background-color: #3498db;
+            }
+
+            input[type="radio"] + label {
+                margin-left: 5px;
+                vertical-align: middle;
+                font-size: 16px;
+            }
+    </style>
+
+</head>
+<body>
+    
+    <center>
+        <h1>Session Details</h1>
+        
+        <div class="button">
+            <button onclick="redirectToCreatePage()">Create</button>
+            <button>Edit</button>
+        </div>
+        <div class="search-box">
+            <input type="text" name="q" placeholder=" Search ( Program, Activity)" required>
+            <button type="submit" class="search-btn">
+                <i class="fas fa-search"></i>
+            </button>
+           
+        </div>
+      
+        <div class="filter-options">
+            <i class="fas fa-filter filter-icon"></i>
+            <div class="dropdowns">
+                <select id="filter-select">
+                    <option value="none">-- Select Filter Option --</option>
+                    <option value="Program">Program</option>
+                    <option value="Project">Project</option>
+                    <option value="Date">Date</option>
+                    <option value="Center">Center Type</option>
+                    <option value="Trainer">Trainer</option>
+                
+                </select><br>
+                
+                <div id="programDropdown" class="dropdown">
+                    
+                    <label for="program-select"></label>
+                    <select id="program-select">
+                        <option value="">Select an option</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                        <option value="E">E</option>
+                    </select>
+                </div>
+        
+                <div id="projectDropdown" class="dropdown">
+                    <label for="project-select"></label>
+                    <select id="project-select">
+                        <option value="">Select an option</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                        <option value="E">E</option>
+
+                    </select>
+                </div>
+                        
+                <div id="dateDropdown" class="dropdown">
+                    <label>From: </label><input type="date" id="from-date">
+                    <label>To: </label><input type="date" id="to-date"><br><br>
+                    <!-- or -->
+                    <select id="past-days-select">
+                        <option value="28">Past 28 days</option>
+                        <option value="30">Past 30 days</option>
+                        <!-- Add more options as needed -->
+                    </select>
+                </div>
+                <div id="centerDropdown" class="dropdown">
+                    <label for="center-select"></label>
+                    <select id="center-select">
+                        <option value="">Select an option</option>
+                        <option value="DJ Halli 1">DJ Halli 1</option>
+                        <option value="DJ Halli 2">DJ Halli 2</option>
+                        <option value="Bagalur">Bagalur</option>
+                        <option value="Mylanahalli">Mylanahalli</option>
+                        <option value="Kannur">Kannur</option>
+                        <option value="Koramangala">Koramangala</option>
+                    </select>
+                </div>
+        
+                <div id="trainerDropdown" class="dropdown">
+                    <label for="trainer-select"></label>
+                    <select id="trainer-select">
+                        <option value="">Select an option</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                        <option value="E">E</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+       
+
+    </center>
+
+    <div class="table">
+
+        <table bgcolor="">
+            <tr bgcolor="orange">
+                <th>Edit</th>
+                <th>Date</th>
+                <th>Program</th>
+                <th>Project</th>
+                <th>Activity</th>
+                <th>Center Type</th>
+                <th>Beneficiaries</th>
+              
+
+            </tr>
+            <tr bgcolor="white">
+                <td><input type="radio" name="selection"></td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+            </tr>
+            <tr bgcolor="white">
+               
+                <td><input type="radio" name="selection"></td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+            </tr>
+            <tr bgcolor="white">
+                
+                <td><input type="radio" name="selection"></td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+            </tr>
+            <tr bgcolor="white">
+               
+                <td><input type="radio" name="selection"></td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+            </tr>
+            <tr bgcolor="white">
+               
+                <td><input type="radio" name="selection"></td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+            </tr>
+            <tr bgcolor="white">
+                
+                <td><input type="radio" name="selection"></td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+            </tr>
+            <tr bgcolor="white">
+                
+                <td><input type="radio" name="selection"></td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+            </tr>
+            <tr bgcolor="white">
+                
+                <td><input type="radio" name="selection"></td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+            </tr>
+            <tr bgcolor="white">
+                
+                <td><input type="radio" name="selection"></td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+            </tr>
+            <tr bgcolor="white">
+                
+                <td><input type="radio" name="selection"></td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        function redirectToCreatePage() {
+            window.location.href = "session2.html"; // Redirect to session2.html
+        }
+    </script>
+    <!-- <a href="emp.html">SESSION</a><br>
+    <a href="index.html">HOME</a> -->
+
+
+
+
+    <header>
+
+        <div class="menu-toggle" id="menuToggle">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+    </header>
+    <nav id="sidebar">
+        <ul>
+            <li>
+                <img src="./cf_logo.png" width="105%">
+            </li>
+            <li><a href="index.html"><i class="fa-solid fa-house" style="color: #d66e29;"></i>Home</a></li>
+            <li><a href="sessdetails.html"><i class="fa-solid fa-business-time" style="color: #c58326;"></i>Sessions</a></li>
+            <li><a href="emp.html"><i class="fa-solid fa-chart-simple" style="color: #dd7c22;"></i>Details</a></li>
+
+        </ul>
+    </nav>
+ 
+    <script>
+        const menuToggle = document.getElementById("menuToggle");
+        const sidebar = document.getElementById("sidebar");
+
+        menuToggle.addEventListener("click", () => {
+            sidebar.classList.toggle("active");
+        });
+
+        // Close the sidebar if the user clicks outside of it
+        window.addEventListener("click", (event) => {
+            if (sidebar.classList.contains("active") && event.target !== menuToggle && event.target !== sidebar) {
+                sidebar.classList.remove("active");
+            }
+        });
+
+        
+      
+        document.getElementById("filter-select").addEventListener("change", function() {
+            // Initially hide all dropdowns
+            document.querySelectorAll(".dropdowns .dropdown").forEach(dropdown => {
+                dropdown.style.display = "none";
+            });
+
+            switch(this.value) {
+                case "Program":
+                    document.getElementById("programDropdown").style.display = "block";
+                    break;
+                case "Project":
+                    document.getElementById("projectDropdown").style.display = "block";
+                    break;
+                case "Date":
+                    document.getElementById("dateDropdown").style.display = "block";
+                    break;
+                case "Center":
+                    document.getElementById("centerDropdown").style.display = "block";
+                    break;
+                case "Trainer":
+                    document.getElementById("trainerDropdown").style.display = "block";
+                    break;
+                default:
+                    break;
+            }
+        });
+
+        document.querySelector(".filter-icon").addEventListener("click", function() {
+            const dropdownsDiv = document.querySelector(".dropdowns");
+            if (dropdownsDiv.style.display === "none" || dropdownsDiv.style.display === "") {
+                dropdownsDiv.style.display = "flex";
+            } else {
+                dropdownsDiv.style.display = "none";
+            }
+        });
+
+        function toggleDropdown(nextDropdownId) {
+            const dropdown = document.getElementById(nextDropdownId);
+            if (dropdown.style.display === "none" || dropdown.style.display === "") {
+                dropdown.style.display = "block";
+            } else {
+                dropdown.style.display = "none";
+            }
+        }
+
+
+        function toggleDropdown(nextDropdownId) {
+            const dropdown = document.getElementById(nextDropdownId);
+            if (dropdown.style.display === "none" || dropdown.style.display === "") {
+                dropdown.style.display = "block";
+            } else {
+                dropdown.style.display ="none";
+            }
+        }
+
+
+    </script>
+
+
+
+
+</body>
+</html>
+
