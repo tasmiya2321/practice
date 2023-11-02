@@ -40,6 +40,15 @@
          ? "text"
          :"password"
     }
+
+        function redirectToHome() {
+    window.location.href = "home.html";
+}
+
+    document.getElementById("login-form").addEventListener("submit", function (e) {
+        e.preventDefault(); 
+        redirectToHome(); 
+    });
 </script>
 </body>
 </html>
